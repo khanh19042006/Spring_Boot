@@ -1,20 +1,33 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.request.CreateProductRequest;
+import com.example.demo.model.Product;
+import com.example.demo.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Validated
 @RequestMapping("/api/product")
 public class ProductController {
+
+    private final ProductService productService;
+
+    public ProductController(ProductService productService){
+        this.productService = productService;
+    }
+
     @GetMapping
     public List<Product> getListProduct(@RequestParam(name = "name") String name){
         if (name.equalsIgnoreCase("")){
-            return productService.findProductByName(name);
+            return productService.getAllProducts();
         }
-        return productService.findAll();
+        return productService.getProductsByName(name);
     }
 
     @GetMapping("/{id}")
@@ -23,8 +36,8 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createProduct(@RequestBody createProductRequest createProduct){
-        Product product = productService.create(createProduct);
+    public ResponseEntity<?> createProduct(@Valid @RequestBody CreateProductRequest createProduct){
+        CreateProductRequest product = productService.create(createProduct);
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 
@@ -37,10 +50,10 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public boolean deleteProductById(@PathVariable String id){
+    public ResponseEntity<?> deleteProductById(@PathVariable String id){
         Product delete = productService.delete(id);
         if (delete != null)
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(delete);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(delete);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }
