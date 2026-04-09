@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CategoryReponsitory extends JpaRepository<Category, Long> {
-    public void deleteById(Long id);
-    public Optional<Category> findByName(String name);
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+    void deleteById(Long id);
+    Optional<Category> findByName(String name);
 }

@@ -13,15 +13,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/api/products")
+@RestController
+@RequestMapping("/api/product")
 @Validated
 public class ProductController {
 
     private final ProductService productService;
 
-    private ProductController(ProductService productService){
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
+
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<Product>>> findAll(){
@@ -49,7 +51,7 @@ public class ProductController {
                 .body(ApiResponse.created(product));
     }
 
-    @GetMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<Product>> updateProduct(
             @RequestBody @PathVariable @Valid UpdateProductRequest updateProductRequest
     ){

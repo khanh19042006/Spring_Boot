@@ -2,7 +2,7 @@ package com.example.btvn4.data;
 
 import com.example.btvn4.entity.Category;
 import com.example.btvn4.entity.Product;
-import com.example.btvn4.repository.CategoryReponsitory;
+import com.example.btvn4.repository.CategoryRepository;
 import com.example.btvn4.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -11,12 +11,12 @@ import java.util.List;
 
 @Component
 public class DataSeeder implements CommandLineRunner {
-    private final CategoryReponsitory categoryReponsitory;
+    private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
 
-    private DataSeeder(CategoryReponsitory categoryReponsitory,
+    private DataSeeder(CategoryRepository categoryRepository,
                        ProductRepository productRepository){
-        this.categoryReponsitory = categoryReponsitory;
+        this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
     }
 
@@ -25,7 +25,7 @@ public class DataSeeder implements CommandLineRunner {
         List<Category> categories = ListData.categories;
         List<Product> products = ListData.products;
 
-        categoryReponsitory.saveAll(categories);
-        productRepository.saveAll(products);
+//        categoryRepository.saveAll(categories);
+//        productRepository.saveAll(products);
     }
 }

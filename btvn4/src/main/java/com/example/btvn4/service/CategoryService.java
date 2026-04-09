@@ -5,7 +5,6 @@ import com.example.btvn4.dto.UpdateCategoryRequest;
 import com.example.btvn4.entity.Category;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CategoryService {
     public Category addCategory(CreateCategoryRequest categoryRequest);

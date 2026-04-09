@@ -2,7 +2,6 @@ package com.example.btvn4.controller;
 
 import com.example.btvn4.dto.CreateCategoryRequest;
 import com.example.btvn4.dto.UpdateCategoryRequest;
-import com.example.btvn4.dto.UpdateProductRequest;
 import com.example.btvn4.dto.response.ApiResponse;
 import com.example.btvn4.entity.Category;
 import com.example.btvn4.service.CategoryService;
@@ -14,13 +13,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("{/api/categories}")
+@RestController
 @Validated
+@RequestMapping("/api/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
 
-    private CategoryController(CategoryService categoryService){
+    public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
@@ -32,7 +32,7 @@ public class CategoryController {
                 .body(ApiResponse.sussces(categories));
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<Category>> findById(@PathVariable Long id){
         Category category = categoryService.findById(id);
         return ResponseEntity
@@ -51,7 +51,7 @@ public class CategoryController {
                 .body(ApiResponse.created(saved));
     }
 
-    @PutMapping("{/id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<Category>> updateCategory(
             @RequestBody @Valid UpdateCategoryRequest updateCategoryRequest,
             @PathVariable Long id
@@ -62,7 +62,7 @@ public class CategoryController {
                 .body(ApiResponse.sussces(category));
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteCategory(@PathVariable Long id){
         categoryService.removeCategory(id);
         return ResponseEntity
