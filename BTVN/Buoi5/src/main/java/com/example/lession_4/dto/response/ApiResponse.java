@@ -32,11 +32,11 @@ public class ApiResponse<T> {
         return new ApiResponse<>(200, "Thành công", data);
     }
 
-    public static <T> ApiResponse created (T data){
+    public static <T> ApiResponse<T> created (T data){
         return new ApiResponse(201, "Khởi tạo thành công", data);
     }
 
-    public static <T> ApiResponse error (int code, String message){
+    public static <T> ApiResponse<T> error (int code, String message){
         return new ApiResponse(code, message);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.lession_4.dto;
 
+import com.example.lession_4.entity.Author;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthorRequest {
-    @Size(min = 2, max = 10, message = "Tên phải dài 2-100 ký tự")
+    @Size(min = 2, max = 100, message = "Tên phải dài 2-100 ký tự")
     private String name;
 
     @NotBlank

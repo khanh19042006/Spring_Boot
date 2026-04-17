@@ -3,10 +3,7 @@ package com.example.lession_4.entity;
 import com.example.lession_4.entity.book.Book;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,13 +14,14 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 100)
-    @Size(min = 2, max = 10)
+    @Size(min = 2, max = 100)
     private String name;
 
     @Column(unique = true, nullable = false)

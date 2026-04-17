@@ -1,6 +1,6 @@
 package com.example.lession_4.exception;
 
-import com.example.btvn4.dto.response.ApiResponse;
+import com.example.lession_4.dto.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
