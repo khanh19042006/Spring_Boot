@@ -5,6 +5,8 @@ import com.example.btvn4.dto.UpdateProductRequest;
 import com.example.btvn4.dto.response.ApiResponse;
 import com.example.btvn4.entity.Product;
 import com.example.btvn4.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/product")
 @Validated
+@Tag(name = "Product Management", description = "Api quản lý sản phẩm")
 public class ProductController {
 
     private final ProductService productService;
@@ -24,7 +27,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-
+    @Operation(summary = "Lấy tất cả sản phẩm")
     @GetMapping
     public ResponseEntity<ApiResponse<List<Product>>> findAll(){
         List<Product> products = productService.findAll();
@@ -33,6 +36,7 @@ public class ProductController {
                 .body(ApiResponse.sussces(products));
     }
 
+    @Operation(summary = "Lấy sản phẩm theo id của sản phẩm")
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<Product>> findById(@PathVariable Long id){
         Product product = productService.findById(id);
@@ -41,6 +45,7 @@ public class ProductController {
                 .body(ApiResponse.sussces(product));
     }
 
+    @Operation(summary = "Thêm 1 sản phẩm vào database")
     @PostMapping
     public ResponseEntity<ApiResponse<Product>> createProduct(
             @RequestBody @Valid CreateProductRequest createProductRequest
@@ -53,7 +58,8 @@ public class ProductController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<Product>> updateProduct(
-            @RequestBody @PathVariable @Valid UpdateProductRequest updateProductRequest
+            @RequestBody @Valid UpdateProductRequest updateProductRequest,
+            @PathVariable Long id
     ){
         Product product = productService.updateProduct(updateProductRequest);
         return ResponseEntity

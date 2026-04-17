@@ -4,13 +4,13 @@ import com.example.btvn4.dto.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandle {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiResponse<Void>> handleResourceNotFound(ResourceNotFoundException ex){
@@ -47,11 +47,11 @@ public class GlobalExceptionHandle {
     }
 
     //=============== Exception chung =====================
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse<Void>> handGeneriException(Exception ex){
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ApiResponse.error(500, "Lỗi hệ thống, vui lòng thử lại sau"));
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ApiResponse<Void>> handGeneriException(Exception ex){
+//        return ResponseEntity
+//                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                .body(ApiResponse.error(500, "Lỗi hệ thống, vui lòng thử lại sau"));
+//    }
 
 }
